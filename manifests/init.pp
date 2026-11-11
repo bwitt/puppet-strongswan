@@ -1,7 +1,7 @@
 # @summary Installs and manages strongSwan
 #
 # @param package_name
-#   The strongswan package name.
+#   The strongswan package name(s).
 # @param package_ensure
 #    The desired package state. Can be used to install `latest` or a specific version etc.
 # @param service_name
@@ -19,7 +19,7 @@
 # @param charon_conf
 #    The location of the main `charon.conf` config file. WARNING, this option is not currently used.
 class strongswan (
-  $package_name        = 'strongswan',
+  $package_name        = $strongswan::params::package_name,
   $package_ensure      = 'installed',
   $service_name        = $strongswan::params::service_name,
   $service_ensure      = running,

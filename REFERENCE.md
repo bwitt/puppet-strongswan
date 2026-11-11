@@ -51,9 +51,9 @@ The following parameters are available in the `strongswan` class:
 
 Data type: `Any`
 
-The strongswan package name.
+The strongswan package name(s).
 
-Default value: `'strongswan'`
+Default value: `$strongswan::params::package_name`
 
 ##### <a name="-strongswan--package_ensure"></a>`package_ensure`
 

@@ -4,6 +4,7 @@
 class strongswan::params {
   case $facts['os']['family'] {
     'Redhat': {
+      $package_name        = 'strongswan'
       $strongswan_dir      = '/etc/strongswan'
       $service_name        = 'strongswan'
       $ipsec_d_dir         = '/etc/strongswan/ipsec.d'
@@ -27,6 +28,7 @@ class strongswan::params {
       $charon_conf_dir     = '/etc/strongswan.d'
       case $facts['os']['name'] {
         'debian': {
+          $package_name = 'strongswan'
           if versioncmp($facts['os']['release']['full'], '11') >= 0 {
             $service_name = 'strongswan-starter'
           } else {
@@ -34,6 +36,12 @@ class strongswan::params {
           }
         }
         'ubuntu': {
+          # Since 26.04 the strongswan metapackage defaults to swanctl instead of starter
+          if versioncmp($facts['os']['release']['full'], '26.04') >= 0 {
+            $package_name = ['strongswan-starter', 'strongswan']
+          } else {
+            $package_name = 'strongswan'
+          }
           if versioncmp($facts['os']['release']['full'], '20.04') >= 0 {
             $service_name = 'strongswan-starter'
           } else {

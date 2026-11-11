@@ -17,6 +17,12 @@ describe 'strongswan' do
 
       context 'strongswan::package' do
         it { is_expected.to contain_package('strongswan') }
+
+        if facts[:os]['name'] == 'Ubuntu' && facts[:os]['release']['major'] == '26.04'
+          it { is_expected.to contain_package('strongswan-starter') }
+        else
+          it { is_expected.not_to contain_package('strongswan-starter') }
+        end
       end
 
       context 'strongswam::service' do
